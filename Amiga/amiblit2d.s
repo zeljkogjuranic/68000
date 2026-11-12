@@ -1,4 +1,4 @@
-blit2d_line:
+blit2d_line_lp:
 	; inputs:
 	; a0 = bitplane buffer pointer
 	; d0,d1 = x1,x2 16bit (1+9+6)
@@ -95,6 +95,54 @@ blit2d_line:
 	move.w d1,BLTSIZE(a1)
 	
 	rts
+blit2d_line:
+	move.l a0,blit2d_line_a0
+	move.w d0,blit2d_line_d0
+	move.w d1,blit2d_line_d1
+	move.w d2,blit2d_line_d2
+	move.w d3,blit2d_line_d3
+	bsr blit2d_line_hp
+	move.l blit2d_line_a0,a0
+	adda.w #10240,a0
+	move.w blit2d_line_d0,d0
+	move.w blit2d_line_d1,d1
+	add.w #32,d0
+	add.w #32,d1
+	move.w blit2d_line_d2,d2
+	move.w blit2d_line_d3,d3
+	bsr blit2d_line_hp
+	move.l blit2d_line_a0,a0
+	adda.w #20480,a0
+	move.w blit2d_line_d0,d0
+	move.w blit2d_line_d1,d1
+	move.w blit2d_line_d2,d2
+	move.w blit2d_line_d3,d3
+	add.w #32,d2
+	add.w #32,d3
+	bsr blit2d_line_hp
+	move.l blit2d_line_a0,a0
+	adda.w #30720,a0
+	move.w blit2d_line_d0,d0
+	move.w blit2d_line_d1,d1
+	move.w blit2d_line_d2,d2
+	move.w blit2d_line_d3,d3
+	add.w #32,d0
+	add.w #32,d1
+	add.w #32,d2
+	add.w #32,d3
+	bsr blit2d_line_hp
+
+	rts
+blit2d_line_a0:
+	dc.l 0
+blit2d_line_d0:
+	dc.l 0
+blit2d_line_d1:
+	dc.l 0
+blit2d_line_d2:
+	dc.l 0
+blit2d_line_d3:
+	dc.l 0
 
 blit2d_line_hp:
 	; inputs:
